@@ -4,9 +4,11 @@ const app = express();
 app.get("/makers/:name", (req, res) => {
   const { name } = req.params;
 
-  !name
-    ? res.send(`<h1>Hola desconocido!</h1>`)
-    : res.send(`<h1>Hola ${name}!</h1>`);
+  if (name) {
+    const [first, ...rest] = name.split("");
+
+    res.send(`<h1>Hola ${first.toUpperCase()}${rest.join("")}!</h1>`);
+  }
 });
 
 app.listen("3000", () => {
